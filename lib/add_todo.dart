@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/cubit/todo_cubit.dart';
 
 Future<void> displayTextInputDialog(BuildContext context) async {
   final TextEditingController textFieldController = TextEditingController();
+
   return showDialog(
     context: context,
     builder: (context) {
@@ -20,7 +22,9 @@ Future<void> displayTextInputDialog(BuildContext context) async {
           textCapitalization: TextCapitalization.sentences,
           textInputAction: TextInputAction.done,
           onSubmitted: (value) {
-            print(textFieldController.text);
+            // Add task and trim whitespace
+            BlocProvider.of<TodoCubit>(context)
+                .addTodo(textFieldController.text.trim());
             Navigator.pop(context);
           },
         ),
@@ -34,10 +38,13 @@ Future<void> displayTextInputDialog(BuildContext context) async {
           TextButton(
             child: const Text('OK'),
             onPressed: () {
+              // Add task and trim whitespace
               BlocProvider.of<TodoCubit>(context)
                   .addTodo(textFieldController.text.trim());
-              // Use the text that the user has entered into the text field.
-              print(textFieldController.text.trim());
+
+              if (kDebugMode) {
+                print(textFieldController.text.trim());
+              }
               Navigator.pop(context);
             },
           ),
