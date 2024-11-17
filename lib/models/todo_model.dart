@@ -1,8 +1,8 @@
-class TodDo {
+class ToDo {
   final String name;
   final DateTime createdAt;
 
-  TodDo({
+  ToDo({
     required this.name,
     required this.createdAt,
   });

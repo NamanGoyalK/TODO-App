@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo/cubit/todo_cubit.dart';
 
 Future<void> displayTextInputDialog(BuildContext context) async {
   final TextEditingController textFieldController = TextEditingController();
@@ -32,7 +34,10 @@ Future<void> displayTextInputDialog(BuildContext context) async {
           TextButton(
             child: const Text('OK'),
             onPressed: () {
-              print(textFieldController.text);
+              BlocProvider.of<TodoCubit>(context)
+                  .addTodo(textFieldController.text.trim());
+              // Use the text that the user has entered into the text field.
+              print(textFieldController.text.trim());
               Navigator.pop(context);
             },
           ),
