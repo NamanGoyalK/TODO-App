@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/add_todo.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -10,19 +11,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: ThemeData.dark().colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
       body: const Center(
@@ -32,7 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () => displayTextInputDialog(context),
         tooltip: 'Add Task',
         child: const Icon(Icons.add),
       ),
